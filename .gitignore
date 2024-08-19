@@ -1,0 +1,20 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Diretórios de testes (opcional)
+tests/unit/
+tests/integration/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editor de texto / IDE
+.vscode/
