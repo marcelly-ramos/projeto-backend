@@ -1,18 +1,18 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const config = require('./config.json'); 
-const env = process.env.NODE_ENV || 'development';
-const dbConfig = config[env];
 
+// Configuração do Sequelize utilizando variáveis de ambiente
 const sequelize = new Sequelize(
-  dbConfig.database,
-  dbConfig.username,
-  dbConfig.password,
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: dbConfig.host,
-    dialect: dbConfig.dialect,
-    port: dbConfig.port || 3306,
+    host: process.env.DB_HOST,
+    dialect: 'mysql',  
+    port: process.env.DB_PORT || 3306,
     logging: false,
-  });
+  }
+);
 
 // Testar a conexão
 sequelize.authenticate()

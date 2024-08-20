@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const Product = require('./Product');
+const sequelize = require('../../config/database');
 
 const ProductOption = sequelize.define('ProductOption', {
   id: {
@@ -41,10 +40,12 @@ const ProductOption = sequelize.define('ProductOption', {
   tableName: 'product_options',
 });
 
-ProductOption.belongsTo(Product, {
-  foreignKey: 'product_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+ProductOption.associate = (models) => {
+  ProductOption.belongsTo(models.Product, {
+    foreignKey: 'product_id',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  });
+};
 
 module.exports = ProductOption;

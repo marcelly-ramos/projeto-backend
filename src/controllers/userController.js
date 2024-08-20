@@ -19,6 +19,7 @@ exports.getUserById = async (req, res) => {
     }
     res.status(200).json(user);
   } catch (error) {
+    console.error('Erro ao buscar usuário:', error);
     res.status(500).json({ message: 'Erro ao buscar usuário', error });
   }
 };
@@ -98,6 +99,7 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
+// Gerar token
 exports.generateToken = async (req, res) => {
   const { email, password } = req.body;
 
@@ -122,6 +124,6 @@ exports.generateToken = async (req, res) => {
     return res.status(200).json({ token });
   } catch (error) {
     console.error('Erro ao gerar token:', error);
-    return res.status(500).json({message: 'Erro interno do servidor' });
+    return res.status(500).json({ message: 'Erro interno do servidor' });
   }
 };

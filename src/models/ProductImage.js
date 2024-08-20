@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../../config/database');
 const Product = require('./Product');
 
-
+// Definição do modelo ProductImage
 const ProductImage = sequelize.define('ProductImage', {
   id: {
     type: DataTypes.INTEGER,
@@ -13,7 +13,7 @@ const ProductImage = sequelize.define('ProductImage', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: Product,
+      model: Product, 
       key: 'id',
     },
   },
@@ -30,6 +30,7 @@ const ProductImage = sequelize.define('ProductImage', {
   tableName: 'product_images',
 });
 
+// Associação com Product
 ProductImage.associate = (models) => {
   ProductImage.belongsTo(models.Product, {
     foreignKey: 'product_id',

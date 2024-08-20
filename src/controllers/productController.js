@@ -1,5 +1,6 @@
 const { Product, Category, Image, Option } = require('../models');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 // Middleware para verificar o token JWT
 const authenticateToken = (req, res, next) => {
@@ -65,7 +66,6 @@ exports.createProduct = async (req, res) => {
     }
 };
 
-
 // Função para obter uma lista de produtos
 exports.getProducts = async (req, res) => {
     const {
@@ -98,7 +98,7 @@ exports.getProducts = async (req, res) => {
     }
 
     if (category_ids) {
-        filter.category_ids = category_ids.split(',').map(id => parseInt(id, 10));
+        filter['$categories.id$'] = category_ids.split(',').map(id => parseInt(id, 10));
     }
 
     if (priceRange) {
